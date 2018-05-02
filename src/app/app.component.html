@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <div class="main-container">
+    <span>{{title}}</span>
+
+    <span class="example-spacer"></span>
+
+    <a mat-button routerLink="/workouts">Workouts</a>
+  </div>
+</mat-toolbar>
+
+<div class="main-container">
+  <router-outlet></router-outlet>
+  <app-messages></app-messages>
+</div>
+
+
+

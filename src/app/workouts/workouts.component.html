@@ -1,0 +1,9 @@
+<mat-nav-list>
+  <h3 mat-subheader>Workouts</h3>
+  <a mat-list-item *ngFor="let workout of workouts; last as last" routerLink="/workout/{{workout.id}}" >
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <span mat-line>{{workout.name}}</span>
+    <span mat-line class="demo-secondary-text">{{workout.date | date}}</span>
+    <mat-divider inset *ngIf="!last"></mat-divider>
+  </a>
+</mat-nav-list>

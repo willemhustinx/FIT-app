@@ -1,0 +1,93 @@
+<div *ngIf="workout">
+
+  <mat-card  *ngFor="let WorkoutExercise of workoutExercises">
+
+    <mat-toolbar class="card-toolbar">
+
+      <mat-icon class="toolbar-icon">favorite</mat-icon>
+
+      <span class="toolbar-title">{{WorkoutExercise.id}} - {{WorkoutExercise.name}}</span>
+      <span class="toolbar-spacer"></span>
+
+      <button mat-raised-button color="primary" (click)="toggleEditable(WorkoutExercise.id)" *ngIf="!editable.includes(WorkoutExercise.id)">Edit</button>
+
+      <button mat-raised-button color="warn" (click)="deleteWorkoutExercise(WorkoutExercise.id)" *ngIf="editable.includes(WorkoutExercise.id)">Delete</button>
+      <button mat-raised-button color="primary" (click)="updateWorkoutExercise(WorkoutExercise.id)" *ngIf="editable.includes(WorkoutExercise.id)">Save</button>
+    </mat-toolbar>
+
+    <mat-card-content>
+      <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel purus ultricies, faucibus nisl eu, dignissim libero. Ut laoreet, eros sed finibus luctus, odio libero dictum ante, ut facilisis sapien dolor at sapien. Phasellus et ullamcorper leo, nec dictum justo. Cras arcu justo, varius eget purus quis, dapibus condimentum purus. Mauris libero ex, consequat id justo vel, lacinia malesuada eros. Vivamus ultricies velit sed lacus ornare, at laoreet libero sodales. Praesent nisl elit, pellentesque vel mauris a, pulvinar rhoncus urna. Aliquam erat volutpat.
+      </p>
+    </mat-card-content>
+
+    <mat-divider [inset]="true"></mat-divider>
+    <mat-card-content>
+      <table class="mat-table">
+        <thead>
+        <tr class="mat-header-row">
+          <th class="mat-header-cell"> No. </th>
+          <th class="mat-header-cell"> Amount </th>
+          <th class="mat-header-cell"> Weight </th>
+          <th class="mat-header-cell"><p  *ngIf="editable.includes(WorkoutExercise.id)">Delete</p></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="mat-row" *ngFor="let workoutExerciseSet of WorkoutExercise.workoutExerciseSets">
+          <td class="mat-cell">
+            <input *ngIf="editable.includes(WorkoutExercise.id)" [(ngModel)]="workoutExerciseSet.position" placeholder="no."/>
+            <p *ngIf="!editable.includes(WorkoutExercise.id)">{{workoutExerciseSet.position}}</p>
+          </td>
+          <td class="mat-cell">
+            <input *ngIf="editable.includes(WorkoutExercise.id)" [(ngModel)]="workoutExerciseSet.amount" placeholder="amount"/>
+            <p *ngIf="!editable.includes(WorkoutExercise.id)">{{workoutExerciseSet.amount}}</p>
+          </td>
+          <td class="mat-cell">
+            <input *ngIf="editable.includes(WorkoutExercise.id)" [(ngModel)]="workoutExerciseSet.weight" placeholder="weight"/>
+            <p *ngIf="!editable.includes(WorkoutExercise.id)">{{workoutExerciseSet.weight}}</p>
+          </td>
+          <td class="mat-cell">
+            <button mat-icon-button color="warn" *ngIf="editable.includes(WorkoutExercise.id)" (click)="deleteWorkoutExerciseSet(WorkoutExercise.id, workoutExerciseSet.id)">
+              <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-cell">
+            <input #exerciseSet.position [(ngModel)]="workoutExerciseSets[WorkoutExercise.id].position" placeholder="no."/>
+          </td>
+          <td class="mat-cell">
+            <input #exerciseSet.amount [(ngModel)]="workoutExerciseSets[WorkoutExercise.id].amount" placeholder="amount"/>
+          </td>
+          <td class="mat-cell">
+            <input #exerciseSet.weight [(ngModel)]="workoutExerciseSets[WorkoutExercise.id].weight" placeholder="weight"/>
+          </td>
+          <td class="mat-cell">
+            <button mat-icon-button color="primary" (click)="addWorkoutExerciseSet(WorkoutExercise.id);">
+              <mat-icon>add</mat-icon>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+
+    <mat-toolbar class="card-toolbar">
+
+      <mat-icon class="toolbar-icon">favorite</mat-icon>
+
+      <span class="toolbar-title">
+        <input #exerciseName/>
+      </span>
+
+      <span class="toolbar-spacer"></span>
+      <button mat-raised-button color="primary" (click)="addWorkoutExercise(exerciseName.value); exerciseName.value=''">Create</button>
+
+    </mat-toolbar>
+
+  </mat-card>
+</div>
+
